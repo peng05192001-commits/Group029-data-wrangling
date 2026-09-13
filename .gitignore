@@ -1,0 +1,21 @@
+# Private data and assessment administration
+raw_package/
+outputs/
+figures/
+AI_records/
+*AI_declaration*
+*.docx
+*.zip
+*.env
+.env*
+*credentials*
+*secret*
+
+# Notebook outputs must be cleared before committing
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vscode/
+.DS_Store
