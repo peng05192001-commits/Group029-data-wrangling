@@ -1,0 +1,19 @@
+case_id,function,input_value,expected_output,purpose
+TXT-01,clean_narrative_text,"[SYSTEM] <p>Leave at reception</p> PROMO: B3SAVE-24 https://orders.example/help",leave at reception,Remove wrapper promo URL and normalise case
+TXT-02,extract_promo_code,"[SYSTEM] <p>Leave at reception</p> PROMO: B3SAVE-24",B3SAVE-24,Extract a valid promotion code
+TXT-03,clean_narrative_text,"[SOURCE: mobile-app] <p>Caf&eacute; setup was easy 😊</p> Reference: HORD123456 | SKU: SKU-ABC123 #verified-buyer",café setup was easy,Decode entity and remove wrappers references social token and emoji
+TXT-04,extract_order_reference,"Reference: HORD123456 | SKU: SKU-ABC123",HORD123456,Extract a valid bounded order reference
+TXT-05,extract_product_sku,"Reference: HORD123456 | SKU: SKU-ABC123",SKU-ABC123,Extract a valid bounded SKU
+TXT-06,extract_order_reference,"codes XHORD1234567 and HORD12345 are invalid",NaN,Reject embedded or wrong-length near-matches
+TXT-07,build_latin_analysis,"service était bon 包装很好",service était bon,Preserve Latin diacritics and remove non-Latin letters
+TXT-08,contains_non_latin_script,"service était bon 包装很好",True,Detect at least one non-Latin letter
+TXT-09,build_latin_analysis,包装很好,NaN,Return the literal sentinel when no Latin letter remains
+TXT-10,clean_narrative_text,"   [VERIFIED_PURCHASE] <div>Reliable     for daily use</div>   ",reliable for daily use,Collapse repeated whitespace
+TXT-11,extract_order_reference,reference: hord123456,HORD123456,Normalise a valid lower-case reference to upper case
+TXT-12,extract_product_sku,SKU-ABC123-extra,NaN,Reject a malformed SKU extension instead of returning a valid prefix
+TXT-13,extract_promo_code,promo: b3save-24,B3SAVE-24,Normalise a valid lower-case promotion code to upper case
+TXT-14,clean_narrative_text,,NaN,Return the literal sentinel for an empty input string
+TXT-15,clean_narrative_text,"[CATALOGUE] <p>Portable desk stand</p>",portable desk stand,Remove the catalogue marker
+TXT-16,clean_narrative_text,"[RATING: 4/5] <p>Useful for travel</p>",useful for travel,Remove a valid parameterised rating marker
+TXT-17,clean_narrative_text,"<p>Please contact support</p> @store_support",please contact support,Remove the exact support social marker
+TXT-18,clean_narrative_text,"[NOTE] Keep bracketed customer wording",[note] keep bracketed customer wording,Preserve bracketed text that is not a published removable marker
